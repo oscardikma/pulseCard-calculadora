@@ -1144,7 +1144,7 @@ background-color: #00000000;
     width: 100px;
     height: 100px;
     margin-left: 86rem;
-    background: url(../res/empresas/money.png), rgba(188, 15, 15, 0) 50% / cover no-repeat;
+    background: url(/res/empresas/money.png), rgba(188, 15, 15, 0) 50% / cover no-repeat;
     flex-shrink: 0;
     cursor: pointer;
 }
@@ -1358,7 +1358,7 @@ background-color: #00000000;
     width: 200px;
     height: 200px;
     border-radius: 15px;
-    background: url(../res/empresas/arcelor.png);
+    background: url(/res/empresas/arcelor.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1369,7 +1369,7 @@ background-color: #00000000;
     width: 200px;
     height: 200px;
     border-radius: 15px;
-    background: url(../res/empresas/cbmm.png);
+    background: url(/res/empresas/cbmm.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1391,7 +1391,7 @@ background-color: #00000000;
     width: 200px;
     height: 200px;
     border-radius: 15px;
-    background: url(../res/empresas/ternium.png);
+    background: url(/res/empresas/ternium.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1402,7 +1402,7 @@ background-color: #00000000;
     width: 200px;
     height: 200px;
     border-radius: 15px;
-    background: url(../res/empresas/usiminas.png);
+    background: url(/res/empresas/usiminas.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1413,7 +1413,7 @@ background-color: #00000000;
     width: 150px;
     height: 150px;
     border-radius: 15px;
-    background: url(../res/empresas/apream.png);
+    background: url(/res/empresas/apream.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1424,7 +1424,7 @@ background-color: #00000000;
     width: 150px;
     height: 150px;
     border-radius: 15px;
-    background: url(../res/empresas/csn.png) rgb(255, 255, 255) 50%;
+    background: url(/res/empresas/csn.png) rgb(255, 255, 255) 50%;
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1435,8 +1435,8 @@ background-color: #00000000;
     width: 150px;
     height: 150px;
     border-radius: 15px;
-    background: #FFF;
-    background: url(../res/empresas/belgo.png), rgb(255, 255, 255) 50%;
+    background: hsl(0, 0%, 100%);
+    background: url(/res/empresas/belgo.png), rgb(255, 255, 255) 50%;
     background-repeat: no-repeat;
     background-size: 100%;
     flex-shrink: 0;
@@ -1446,7 +1446,7 @@ background-color: #00000000;
 .nacionais .org8 {
     width: 150px;
     height: 150px;
-    background: url(../res/empresas/cba.png), #fff 50%;
+    background: url(/res/empresas/cba.png), #fff 50%;
     background-repeat: no-repeat;
     background-size: 180px;
     background-position: center;
@@ -1458,7 +1458,7 @@ background-color: #00000000;
     width: 150px;
     height: 150px;
     border-radius: 15px;
-    background: url(../res/empresas/suzano.png)rgb(255, 255, 255) 100%;
+    background: url(/res/empresas/suzano.png)rgb(255, 255, 255) 100%;
     background-repeat: no-repeat;
     background-size: 100%;
     flex-shrink: 0;
@@ -1469,7 +1469,7 @@ background-color: #00000000;
     width: 155px;
     height: 155px;
     border-radius: 15px;
-    background: url(../res/empresas/gerdau.png);
+    background: url(/res/empresas/gerdau.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-shrink: 0;
@@ -1534,16 +1534,7 @@ font-size:12px;
 
 }
 
-.decision{
-    width:30;
-    height: 300px;
-    overflow-x: auto;
-    overflow-y: auto;
-    margin-left:10000px;
-    
-    
 
-}
 
 /*
 git add *
