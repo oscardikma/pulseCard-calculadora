@@ -1156,8 +1156,34 @@ background-color: #00000000;
     margin-top: -50px;
 }
 
+
+
 .pop .time {
     /* margin-top: px;; */
+}
+
+.time2{
+    margin-top:25px;
+}
+ 
+.time2 .format-input{
+    font-size: 25px;
+    font-weight: 800;
+    background-color: rgba(255, 255, 255, 0.377);
+    outline: none;
+    border: 2px solid rgba(60, 255, 0, 0.479);
+    border-radius: 5px;
+    padding: 5px;
+    width: 50px;
+    font-size: 16px;
+    color:#000
+    
+    
+}
+
+.time2 label{
+    font-size: 16px;
+    font-weight: 800;
 }
 
 .pop .time label {

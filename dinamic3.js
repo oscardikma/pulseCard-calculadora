@@ -27,13 +27,15 @@ const empresas = [
 
 let quantidade = 0;
 let somaValor = 0
-let value_func = 2.50// valor interno, valor para venda de 90 reais
-let assinaturaPosterior = 2000
-let assinatura = 2000
+let value_func = 20
+
+let assinaturaPosterior = 3000
+let assinatura = 3000
 
 
 
 function agrupar(event) {
+ // value_func= document.getElementById('valor_func').value
   const empresaClicada = event.target;
   if (empresaClicada.classList.contains('clicada')) {
     quantidade--;
@@ -159,6 +161,7 @@ function zerar() {
   payback.innerText = 0.00
   assinatura =  2000.00
   valor_add=false;
+  //value_func= 0
 }
 
 
