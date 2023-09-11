@@ -1171,6 +1171,7 @@ background-color: #00000000;
     padding: 5px;
     width: 50px;
     font-size: 16px;
+    color:white;
     font-weight: 800;
     background-color: rgba(255, 255, 255, 0.377);
     outline: none;
@@ -1322,17 +1323,23 @@ background-color: #00000000;
 
 .pop .table .tabela {
     width: 467px;
-    height: 102px;
+    height: 130px;
     background: #383636;
 }
 
 #fatMensal,
-#fatAnual {
+#fatAnual, #firstMes {
     border-left: 1px solid white;
 }
 
 #lb2,
 #fatMensal {
+    border-bottom: 1px solid white;
+}
+
+
+#lb3,
+#firstMes {
     border-bottom: 1px solid white;
 }
 

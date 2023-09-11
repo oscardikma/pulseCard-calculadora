@@ -1,3 +1,16 @@
+const qtd_func = [
+  17000,//arcelor
+  2000, //cbmm
+  8000, //terniun
+  6500, //usiminas
+  2000,//aperam
+  30000, // csn
+  3400, //belgo
+  4800,// cba
+  17000, // suzanno
+  10000 // gerdau
+]
+
 const empresas = [
   document.getElementById('org1'),
   document.getElementById('org2'),
@@ -8,45 +21,71 @@ const empresas = [
   document.getElementById('org7'),
   document.getElementById('org8'),
   document.getElementById('org9'),
-  
+  document.getElementById('org10')
+
 ];
 
 let quantidade = 0;
+let somaValor = 0
+let value_func = 2.50// valor interno, valor para venda de 90 reais
+let assinaturaPosterior = 2000
+let assinatura = 2000
+
+
 
 function agrupar(event) {
   const empresaClicada = event.target;
-
   if (empresaClicada.classList.contains('clicada')) {
-      quantidade--;
-      desmarcar(empresaClicada.id)
+    quantidade--;
+    desmarcar(empresaClicada.id)
+    const indice = empresas.findIndex(empresa => empresa === empresaClicada);
+    somaValor -= qtd_func[indice] * value_func; // Subtrai o valor da empresa da soma
   } else {
-      quantidade++;
-      marcar(empresaClicada.id)
-      
-  }
+    quantidade++;
+    marcar(empresaClicada.id)
+    const indice = empresas.findIndex(empresa => empresa === empresaClicada);
+    somaValor += qtd_func[indice] * value_func; // Adiciona o valor da empresa à soma
+    
 
+    alert(`a empresa ${empresaClicada.getAttribute('name')} possui ${qtd_func[indice]} colaboradores`)
+
+  }
   empresaClicada.classList.toggle('clicada');
 
 }
+
+
+/**calcula o primeiro valor pago pelo sistema de pulse card, 
+ * valor assinatura: 5000
+ * valor de funcionario  no primeiro mes: 50,00
+ * valor apos a adesão
+ */
+function calculaFirstReceita(valor_plano) {
+
+
+}
+
+
 /**adcionando o evento a todas as empresas */
-document.getElementById('org1').addEventListener('click',agrupar,false)
-document.getElementById('org2').addEventListener('click',agrupar,false)
-document.getElementById('org3').addEventListener('click',agrupar,false)
-document.getElementById('org4').addEventListener('click',agrupar,false)
-document.getElementById('org5').addEventListener('click',agrupar,false)
-document.getElementById('org6').addEventListener('click',agrupar,false)
-document.getElementById('org7').addEventListener('click',agrupar,false)
-document.getElementById('org8').addEventListener('click',agrupar,false)
-document.getElementById('org9').addEventListener('click',agrupar,false)
+document.getElementById('org1').addEventListener('click', agrupar, false)
+document.getElementById('org2').addEventListener('click', agrupar, false)
+document.getElementById('org3').addEventListener('click', agrupar, false)
+document.getElementById('org4').addEventListener('click', agrupar, false)
+document.getElementById('org5').addEventListener('click', agrupar, false)
+document.getElementById('org6').addEventListener('click', agrupar, false)
+document.getElementById('org7').addEventListener('click', agrupar, false)
+document.getElementById('org8').addEventListener('click', agrupar, false)
+document.getElementById('org9').addEventListener('click', agrupar, false)
+document.getElementById('org10').addEventListener('click', agrupar, false)
 
 
 /**modificar o estilo da empresa selecionada */
-function marcar(id){
+function marcar(id) {
   document.getElementById(id).style.boxShadow = '0px 4px 40px 0px rgba(240, 126, 20, 0.63)';
 }
 
 /**Desmarcar a empresa */
-function desmarcar(id){
+function desmarcar(id) {
   document.getElementById(id).style.boxShadow = 'none';
 }
 
@@ -55,13 +94,13 @@ function desmarcar(id){
 
 function open() {
 
-    var janela = document.getElementById('janela').style
-    janela.display = 'block'
+  var janela = document.getElementById('janela').style
+  janela.display = 'block'
 
 }
 function close() {
-    var janela = document.getElementById('janela').style
-    janela.display = 'none'
+  var janela = document.getElementById('janela').style
+  janela.display = 'none'
 
 }
 
@@ -81,73 +120,34 @@ const btn_plane3 = document.getElementById('plane3')
 //indicadores
 const roi = document.getElementById('ROI')
 const payback = document.getElementById('PAYBACK')
-const tir = document.getElementById('TIR')
+
 
 //tabela do faturamento
-const fat_mes =  document.getElementById('fatMensal')
-const fat_ano =  document.getElementById('fatAnual')
+let all_meses = document.getElementById('fatMensal')
+const start = document.getElementById('firstMes')
+const fat_ano = document.getElementById('fatAnual')
 
 
-  
+
 
 
 /**Calculo de roi  */
-function return_Roi(tempo,valor,investimento) {
-  let receita = tempo * valor;
+function return_Roi(tempo, valor, investimento) {
+  let receita = (tempo * valor);
   let calc = (receita - investimento) / investimento;
   let calc2 = calc * 100;
-    roi.innerText = calc2.toFixed(2)
+  roi.innerText = `${calc2.toFixed(2)}%`
 }
 
 
 
 
 
-
+/**calculo payback */
 function return_Payback(investimento, receita) {
-    let valor = investimento / receita
-    payback.innerText = valor.toFixed(2)
+  let valor = investimento / receita
+  payback.innerText = `${valor.toFixed(2)} meses`
 }
-
-
-/*função para calculo do tir */
-function return_Tir(cashFlows) {
-  
-        const epsilon = 1e-6; // Precisão desejada
-        const maxIterations = 1000; // Número máximo de iterações
-      
-        // Função que calcula o valor presente líquido (NPV) para uma taxa de desconto dada
-        function calculateNPV(rate) {
-          let npv = 0;
-          for (let i = 0; i < cashFlows.length; i++) {
-            npv += cashFlows[i] / Math.pow(1 + rate, i);
-          }
-          return npv;
-        }
-      
-        let guess = 0.1; // Taxa de desconto inicial para tentativa
-        let previousGuess = guess;
-      
-        for (let i = 0; i < maxIterations; i++) {
-          const npv = calculateNPV(guess);
-          const derivative = (calculateNPV(guess + epsilon) - npv) / epsilon;
-          
-          guess = guess - npv / derivative;
-      
-          // Verifica se a diferença entre as tentativas é menor que a precisão desejada
-          if (Math.abs(guess - previousGuess) < epsilon) {
-            return guess;
-          }
-      
-          previousGuess = guess;
-        }
-      
-        // Se não convergiu após o número máximo de iterações
-        return null;
-      }
-      
-    
-      
 
 
 
@@ -155,84 +155,49 @@ function return_Tir(cashFlows) {
 
 /*zera os valores de roi and payback*/
 function zerar() {
-
-    roi.innerText = 0.00
-    payback.innerText = 0.00
-    tir.innerText = 0.00
+  roi.innerText = 0.00
+  payback.innerText = 0.00
+  assinatura =  2000.00
+  valor_add=false;
 }
 
 
 //.toLocaleString('pt-BR')
 
-
+let valor_add = false
 /**calculo do perfil conservador */
 function calculate_economy() {
-    zerar()
-    let investimento = 312365.00
-    let receita = 6000.00 
-    receita =receita*quantidade
-    let faturamentoMes = 'R$' + receita.toFixed(2).replace('.', ',');
-    let faturamentoAno = 'R$' + (receita * 12).toFixed(2).replace('.', ',');
+  zerar()
+  let investimento = 346000.00
+  let tempo = document.getElementById('tmp').value
+  if (!valor_add) {
+    assinatura += somaValor
+    valor_add = true
+    
+  }else{
+    assinatura =  assinaturaPosterior
+  }
+ 
+  assinatura = assinatura * quantidade
 
-    faturamentoMes= faturamentoMes.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    faturamentoAno =  faturamentoAno.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  let mes = 'R$' + assinaturaPosterior.toFixed(2).replace('.', ',');
+  let faturamentoMes = 'R$' + assinatura.toFixed(2).replace('.', ',');
+  let faturamentoAno = 'R$' + (assinaturaPosterior * 12 + somaValor).toFixed(2).replace('.', ',');
 
-    fat_mes.innerText = faturamentoMes
-    fat_ano.innerText=faturamentoAno
-    let tempo = document.getElementById('tmp').value
-    const cashFlows = [investimento*-1, receita,receita,receita,receita]
-    return_Roi(tempo,receita,investimento)
-    return_Payback(investimento, receita)
-   tir.innerText=  return_Tir(cashFlows).toFixed(2)
-}
+  mes = mes.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  faturamentoMes = faturamentoMes.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  faturamentoAno = faturamentoAno.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 
+  all_meses.innerText = mes 
+  start.innerText = faturamentoMes
+  fat_ano.innerText = faturamentoAno
 
-/**calculo do perfil realista */
-function calculate_real() {
-    zerar()
-    let investimento = 312365.00
-    let receita = 8000.00 
-    receita = receita*quantidade
-    let tempo = document.getElementById('tmp').value
-    let faturamentoMes = 'R$' + receita.toFixed(2).replace('.', ',');
-    let faturamentoAno = 'R$' + (receita * 12).toFixed(2).replace('.', ',');
-
-    faturamentoMes= faturamentoMes.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    faturamentoAno =  faturamentoAno.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-
-    fat_mes.innerText = faturamentoMes
-    fat_ano.innerText=faturamentoAno
-    const cashFlows = [investimento*-1, receita,receita,receita,receita]
-    return_Roi(tempo,receita,investimento)
-    return_Payback(investimento, receita)
-    tir.innerText=  return_Tir(cashFlows).toFixed(2)
-}
-
-
-/**calculo do perfil otimista */
-function calculate_optmize() {
-    zerar()
-    let investimento = 312365.00
-    let receita = 10000.00 
-    receita= receita*quantidade
-    let tempo = document.getElementById('tmp').value
-    let faturamentoMes = 'R$' + receita.toFixed(2).replace('.', ',');
-    let faturamentoAno = 'R$' + (receita * 12).toFixed(2).replace('.', ',');
-
-    faturamentoMes= faturamentoMes.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    faturamentoAno =  faturamentoAno.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-
-    fat_mes.innerText = faturamentoMes
-    fat_ano.innerText=faturamentoAno
-    const cashFlows = [investimento*-1, receita,receita,receita,receita]
-    return_Roi(tempo,receita,investimento)
-    return_Payback(investimento, receita)
-    tir.innerText=  return_Tir(cashFlows).toFixed(2)
+  return_Roi(tempo, assinatura, investimento)
+  return_Payback(investimento, assinatura)
 }
 
 
 
 btn_plane1.addEventListener('click', calculate_economy, true)
-btn_plane2.addEventListener('click', calculate_real, true)
-btn_plane3.addEventListener('click', calculate_optmize, true)
+
 
