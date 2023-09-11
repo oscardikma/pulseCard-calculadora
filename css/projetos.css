@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: font-dk;
-    src: url('../CSS/fontes/Guardians.ttf') format('truetype');
+    src: url('./CSS/fontes/Guardians.ttf') format('truetype');
 }
 
 
